@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慶記商旅 - Qingji Inn</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden; /* 隱藏水平滾動條 */
+        }
+
+        header {
+            position: fixed; /* 使用固定定位，使 header 固定在螢幕上方 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 透明背景，調整 alpha 值以達到想要的透明度 */
+            color: white;
+            display: flex; /* 使用 flex 來對齊 logo 和文本 */
+            align-items: center; /* 使 Flexbox 容器內的子元素在垂直方向上居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            padding: 5px;
+            gap: 20px; /* 調整 logo 和文本之間的間距 */
+            z-index: 10; /* 確保 header 在圖片上方 */
+        }
+
+        header img {
+            max-height: 80px; /* 設置 logo 的最大高度 */
+            width: auto; /* 根據最大高度自動調整寬度 */
+        }
+
+        header .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保文本在 header 中左對齊 */
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+        }
+
+        header h2 {
+            margin: 2px 0 0;
+            font-size: 24px;
+        }
+
+        header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav {
+            position: fixed; /* 使用固定定位，使 nav 固定在螢幕上方 */
+            top: 103px; /* 根據 header 的高度調整 top 值，使 nav 位於 header 下方 */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 10; /* 確保 nav 在其他內容上方 */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        .contentSection {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto; /* 將內容區塊居中 */
+            padding: 20px;
+        }
+
+        .contentItem {
+            display: flex;
+            align-items: center;
+            background-color: #e7e7e7; /* 淡灰色背景 */
+            padding: 20px; /* 添加內邊距，使內容不緊貼邊框 */
+            margin-bottom: 20px; /* 添加底部外邊距，讓每個區塊之間有間距 */
+            border-radius: 10px; /* 圓角邊框 */
+        }
+
+        .contentItemReverse {
+            display: flex;
+            align-items: center;
+            background-color: #f8f8f8; /* 淡灰色背景 */
+            padding: 50px; /* 添加內邊距，使內容不緊貼邊框 */
+            margin-bottom: 20px; /* 添加底部外邊距，讓每個區塊之間有間距 */
+            border-radius: 10px; /* 圓角邊框 */
+            flex-direction: row-reverse; /* 反轉內容的排列順序，讓圖片在右邊，文字在左邊 */
+        }
+
+        .contentItem .contentImage,
+        .contentItemReverse .contentImage {
+            flex: 1;
+        }
+
+        .contentItem .contentImage img,
+        .contentItemReverse .contentImage img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 確保圖片不失真 */
+            border-radius: 10px; /* 圖片圓角處理 */
+        }
+
+        .contentItem .contentText,
+        .contentItemReverse .contentText {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 讓文字在垂直方向居中 */
+            align-items: center; /* 水平居中對齊 */
+            text-align: center; /* 讓文字在水平方向居中 */
+        }
+
+        @media (max-width: 768px) {
+            .contentItem,
+            .contentItemReverse {
+                flex-direction: column; /* 在較小的螢幕上，將圖片和文字堆疊 */
+            }
+
+            .contentItem .contentImage,
+            .contentItemReverse .contentImage,
+            .contentItem .contentText,
+            .contentItemReverse .contentText {
+                width: 100%; /* 在小螢幕上，讓圖片和文字都佔滿寬度 */
+            }
+        }
+
+        .btn {
+            width: 150px;
+            display: inline-block; /* 使按鈕自動調整為內聯塊元素 */
+            padding: 10px 20px; /* 添加內邊距 */
+            font-size: 16px; /* 調整字體大小 */
+            color: white; /* 文字顏色 */
+            background-color: #bebebe; 
+            border: none; /* 去掉邊框 */
+            border-radius: 5px; /* 圓角邊框 */
+            text-align: center; /* 文字置中 */
+            text-decoration: none; /* 去掉下劃線 */
+            cursor: pointer; /* 顯示手指狀態的鼠標指標 */
+            transition: background-color 0.3s; /* 漸變效果 */
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* 懸停時的背景顏色 */
+        }
+    </style>
+
+    <!-- 引入外部 CSS -->
+    <link rel="stylesheet" href="slider_style.css">
+    <link rel="stylesheet" href="footer_style.css">
+    
+    <!-- 引入Swiper 的 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- 引入Swiper 的 JavaScript -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <a href="midterm_project.html">
+            <img src="img/logo4.png" alt="Logo">
+        </a>
+        <div class="text">
+            <a href="midterm_project.html">
+                <h1>慶記商旅</h1>
+                <h2>Qingji Inn</h2>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="midterm_project.html">首頁</a>
+        <a href="hotel_intro.html">旅館簡介</a>
+        <a href="room_intro.html">房型介紹</a>
+        <a href="book_online.html">線上訂房</a>
+        <a href="event_news.html">活動消息</a>
+        <a href="traffic_info.html">交通資訊</a>
+    </nav>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="img/img2.jpg" alt="旅館圖片2"></div>
+            <div class="swiper-slide"><img src="img/img4.jpg" alt="旅館圖片4"></div>
+            <div class="swiper-slide"><img src="img/img6.jpg" alt="旅館圖片6"></div>
+            <!-- 添加更多圖片 -->
+        </div>
+        <!-- 分頁指示點 -->
+        <div class="swiper-pagination"></div>
+        <!-- 導航按鈕 -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="contentSection">
+        <div class="contentItem">
+            <div class="contentImage">
+                <img src="img/sea_img.jpg" alt="sea_img">
+            </div>
+            <div class="contentText">
+                <h2>坐擁海景第一排 看見台中的靈魂</h2>
+                
+                <p style="color:#0d5297;">
+                    <strong>
+                    夜晚的海線人山人海，伴隨海浪的低語。入住我們的海景房，在靜謐雅緻的環境中傾聽海哭的聲音，將台中最美的風景盡收眼底。
+                    </strong>
+                </p>
+                <br><br>
+                <a href="hotel_intro.html" class="btn">旅館介紹</a>
+            </div>
+        </div>
+
+        <div class="contentItemReverse">
+            <div class="contentImage">
+                <img src="img/room1.jpg" alt="Image 2">
+            </div>
+            <div class="contentText">
+                <h1 style="color: rgb(27, 156, 113);">精緻客房</h1>
+                <p><b>享譽台中的豪華客房，融合現代設計與典雅風格。每間房間均有最舒適的設施與絕佳景觀，為您提供最佳的放鬆環境。
+                   選擇我們的商旅，感受無與倫比的豪華與貼心服務。</b></p>
+                <br>
+                <a href="room_intro.html" class="btn">查看房型</a>   
+            </div>
+        </div>
+
+        <div class="contentItem">
+            <div class="contentImage">
+                <img src="img/poolimgjpg.jpg" alt="poolimgjpg">
+            </div>
+            <div class="contentText">
+                <h1 style="color: rgb(61, 124, 163);">室內泳池</h1>
+                <p><b>飯店的泳池，海線的體驗。如同大海般的寬闊泳池，頂級的設施給您最特別的舒適與寧靜。在這裡游泳，不用怕抓交替。</b></p>
+            </div>
+        </div>
+ 
+        <div class="contentItemReverse">
+            <div class="contentImage">
+                <img src="img/airport.jpg" alt="airport">
+            </div>
+            <div class="contentText">
+                <h1 style="color: rgb(145, 39, 145);">機場接送與叫車服務</h1>
+                <p><b>本飯店提供機場接送和代叫計程車的服務，為您的下一段旅程做準備。更多詳細的服務內容，請至交通資訊頁面查看。</b></p>
+                <br><br>
+                <a href="traffic_info.html" class="btn">了解更多</a>
+            </div>
+        </div>
+        
+        <div class="contentItem">
+            <div class="contentImage">
+                <img src="img/drink2.jpg" alt="drink2">
+            </div>
+            <div class="contentText">
+                <h1 style="color: rgba(255, 0, 0, 0.763);">佳餚美饌</h1>
+                <p><b>飯店提供精緻的三餐，精心挑選台中在地食材。結合傳統風味的創新料理，匠心獨運的靈魂佳餚，只屬於台中的風味。部分餐飲有限時優惠活動，詳情請至活動消息頁面查看。</b></p>
+                <a href="event_news.html" class="btn">活動消息</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Contact Us</h2>
+                <p>Email: info@qingjiinn.com.tw</p>
+                <p>Phone: +886-8763-8763</p>
+            </div>
+            <div>
+                <h2>Follow Us</h2>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>   
+                <br>    
+                <br>
+                <br>
+                <br>    
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true, // 開啟循環模式
+            pagination: {
+                el: '.swiper-pagination', // 分頁指示點的容器
+                clickable: true, // 點擊分頁指示點能夠切換圖片
+            },
+            navigation: {
+                nextEl: '.swiper-button-next', // 下一張按鈕
+                prevEl: '.swiper-button-prev', // 上一張按鈕
+            },
+            autoplay: {
+                delay: 3000, // 每3秒切換一次
+            },
+        });
+    </script>
+
+</body>
+</html>
+

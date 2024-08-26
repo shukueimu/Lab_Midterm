@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動消息</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden; /* 隱藏水平滾動條 */
+        }
+
+        header {
+            position: absolute; /* 使用絕對定位，使 header 可以在圖片上方 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 透明背景，調整 alpha 值以達到想要的透明度 */
+            color: white;
+            display: flex; /* 使用 flex 來對齊 logo 和文本 */
+            align-items: center; /* 使 Flexbox 容器內的子元素在垂直方向上居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            padding: 5px;
+            gap: 20px; /* 調整 logo 和文本之間的間距 */
+            z-index: 10; /* 確保 header 在圖片上方 */
+        }
+
+        header img {
+            max-height: 80px; /* 設置 logo 的最大高度 */
+            width: auto; /* 根據最大高度自動調整寬度 */
+        }
+
+        header .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保文本在 header 中左對齊 */
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+        }
+
+        header h2 {
+            margin: 2px 0 0;
+            font-size: 24px;
+        }
+
+        header a {
+            text-decoration: none;
+            color:inherit;
+        }
+        
+        nav {
+            position:absolute; /* 固定在頁面上 */
+            top: 103px; /* 使 nav 位於 header 下方 */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 10; /* 確保 nav 在其他內容上方 */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        .topimg4 {
+            position: relative;
+            width: 100%; /* 父容器寬度設為100% */
+            margin: 0; /* 移除外邊距 */
+            padding: 0; /* 移除內邊距 */
+            overflow: hidden; /* 防止圖片溢出 */
+        }
+
+
+        .topimg4 img {
+            width: 100%; /* 圖片寬度設為100% */
+            height: auto; /* 高度自動調整 */
+            display: block; /* 移除圖片下方的間距 */
+            border: none; /* 移除邊框 */
+            margin: 0px; /* 移除外邊距 */
+            padding: 0px; /* 移除內邊距 */
+            object-fit: cover; /* 確保圖片填滿容器且不變形 */
+        }
+
+        .topic{
+            text-align: center;
+            font-size: 40px;
+            color: #555454;
+            font-family: cursive; 
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+
+        /* 針對活動列表項目的標題 */
+        .event-item {
+            cursor: pointer; /* 增加點擊指針提示 */
+            padding: 10px 20px; /* 增加內邊距，避免標題緊貼在邊緣 */
+            background-color: #fff; /* 背景色為白色 */
+            border: 1px solid #ddd; /* 邊框顏色 */
+            border-radius: 5px; /* 圓角邊框 */
+            margin-bottom: 10px; /* 增加項目之間的距離 */
+            transition: background-color 0.3s; /* 背景色過渡效果 */
+        }
+
+        .event-item:hover {
+            background-color: #f0f0f0; /* 鼠標懸停時背景色 */
+        }
+
+        .event-date {
+            display: block; /* 讓日期顯示在一行 */
+            font-size: 16px; /* 調整字體大小 */
+            color: #888; /* 字體顏色 */
+            margin-bottom: 5px; /* 日期和標題之間的間距 */
+        }
+
+        .event-title {
+            font-size: 20px; /* 調整字體大小 */
+            color: #333; /* 調整標題顏色 */
+            font-weight: bold; /* 加粗標題文字 */
+        }
+
+        
+        .event-detail-content {
+            display: flex; /* 使用 flexbox 來讓圖片和文字並排 */
+            align-items: flex-start; /* 確保圖片和文字在垂直方向上對齊至容器的上方 */
+            margin: 20px 0; /* 增加上方和下方的間距 */
+            padding: 20px; /* 增加內邊距來讓內容不會太靠近邊緣 */
+            background-color: white; /* 背景色設定為白色 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加陰影效果來讓區塊更加突出 */
+        }
+
+        .event-detail-content img {
+            max-width: 45%; /* 圖片最大寬度設定為 40% */
+            height: auto; /* 保持圖片的縱橫比 */
+            margin-right: 20px; /* 增加圖片和文字之間的間距 */
+            border-radius: 8px; /* 圖片邊角設置為圓角 */
+        }
+
+        .event-text {
+            max-width: 60%; /* 文字區塊最大寬度設定為 60% */
+        }
+
+        .event-text h2 {
+            margin-top: 0; /* 移除上方外邊距 */
+            font-size: 24px;
+            color: #333;
+        }
+
+        .event-text p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6; /* 調整行距 */
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="footer_style.css">
+
+</head>
+<body>
+
+    <header>
+        <a href="midterm_project.html">
+        <img src="img/logo4.png" alt="Logo">
+        </a>
+        <div class="text">
+            <a href="midterm_project.html">
+            <h1>慶記商旅</h1>
+            <h2>Qingji Inn</h2>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="midterm_project.html">首頁</a>
+        <a href="hotel_intro.html">旅館簡介</a>
+        <a href="room_intro.html">房型介紹</a>
+        <a href="book_online.html">線上訂房</a>
+        <a href="event_news.html">活動消息</a>
+        <a href="traffic_info.html">交通資訊</a>
+        
+    </nav>
+
+    <div class="topimg4">
+        <img src="img/eventimg1.jpg" alt="活動圖片1">
+    </div>
+
+    <h2 class="topic">活動消息</h2>
+    <!--第一個活動  -->
+    <div class="event-list">
+        <div class="event-item" onclick="toggleEventDetails('event1')">
+            <span class="event-date">2024-08-27</span>
+            <span class="event-title">慶記商旅20周年慶特惠活動</span>
+        </div>
+    </div>
+
+    <div id="event-details">
+        <div id="event1" class="event-detail-content" style="display:none;">
+            <img src="img/eventimg2.jpg" alt="活動圖片">
+            <div class="event-text">
+                <h2>慶記商旅20周年慶特惠活動</h2>
+                <p>🎉 <strong>慶祝慶記商旅20周年慶</strong>，感謝您的支持與厚愛！我們精心準備了一系列超值優惠，邀請您一同參與這場盛大的慶祝活動。</p>
+                <p><strong>活動日期：</strong>2024年8月27日至2024年9月10日</p>
+                <p><strong>活動內容：</strong></p>
+                <ul>
+                    <li><strong>豪華客房折扣：</strong>全館客房限時折扣高達30%，讓您以最優惠的價格享受舒適住宿。</li>
+                    <li><strong>免費早餐：</strong>所有入住的賓客均可免費享用豐富自助早餐，開啟美好一天的最佳選擇。</li>
+                    <li><strong>專屬升等：</strong>凡預訂指定房型，即可享受免費升等至高級房型的特權，體驗更奢華的住宿享受。</li>
+                    <li><strong>雙人晚餐券：</strong>參與活動的前100名預訂客戶，將獲得我們精緻雙人晚餐券，品嚐台中最美味的料理。</li>
+                    <li><strong>抽獎活動：</strong>參加活動還有機會贏取價值萬元的豪華大獎，包括高級SPA療程、精品禮品等。</li>
+                </ul>
+                <p><strong>如何參加：</strong></p>
+                <ol>
+                    <li>訪問我們的官方網站或撥打專線預訂客房。</li>
+                    <li>訂房時在備註欄輸入優惠代碼 <strong>ANNIVERSARY2024</strong>，即可享受以上優惠。</li>
+                    <li>按照活動要求完成預訂即可參加抽獎。</li>
+                </ol>
+                <p><strong>注意事項：</strong></p>
+                <ul>
+                    <li>本活動僅限在活動期間內有效，數量有限，先到先得。</li>
+                    <li>優惠不與其他折扣或促銷活動疊加使用。</li>
+                    <li>具體活動細則及條款以酒店網站公布為準。</li>
+                </ul>
+                <p><strong>立即預訂，與我們共同慶祝這一難忘的周年盛典！</strong></p>
+            </div>
+        </div>
+    </div>
+    
+    <!--第二個活動  -->
+    <div class="event-list">
+        <div class="event-item" onclick="toggleEventDetails('event2')">
+            <span class="event-date">2024-08-24</span>
+            <span class="event-title">慶記商旅台中美食節</span>
+        </div>
+        
+    </div>
+    
+    <div id="event-details">
+        <div id="event2" class="event-detail-content" style="display:none;">
+            <img src="img/eventimg3.png" alt="活動圖片">
+            <div class="event-text">
+                <h2>慶記商旅台中美食節</h2>
+                <p>在這次慶記商旅台中美食節，我們自豪地推出一款全新的創意飲品——東泉辣醬拿鐵咖啡。
+                    這款咖啡融合了台中獨特的東泉辣醬風味，為您的味蕾帶來前所未有的刺激與驚喜。辣醬的微辣與咖啡的濃郁香氣完美結合，每一口都充滿了台中獨有的特色。
+                    <br><br>我們為這款東泉辣醬拿鐵咖啡定價110元，但在美食節期間，您可以享受特別的打卡優惠，只需99元，即可品嚐這份獨特的美味。
+                    無論是單獨享用還是與朋友分享，這款飲品都將成為您美食之旅中的亮點。快來參加我們的美食節，體驗這份獨特風味的飲品，讓台中的特色美味為您的味蕾帶來難忘的回憶！
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!--第三個活動  -->
+    <div class="event-list">
+        <div class="event-item" onclick="toggleEventDetails('event3')">
+            <span class="event-date">2024-08-20</span>
+            <span class="event-title">【高鐵飯店聯票】訂房加購高鐵車票，享折價優惠！</span>
+        </div>
+        
+    </div>
+
+    <div id="event-details">
+        <div id="event3" class="event-detail-content" style="display:none;">
+            <img src="img/eventimg4.jpg" alt="活動圖片">
+            <div class="event-text">
+                <h2>【高鐵飯店聯票】訂房加購高鐵車票，享折價優惠！</h2>
+                <p>享受雙重便利與實惠，讓您的旅行更加輕鬆！我們推出全新的高鐵飯店聯票優惠，2024年8月20日起，只需在訂房時加購高鐵車票，即可獲得78折優惠。
+                    無論您是商務出差還是度假旅遊，這個優惠方案都能讓您在享受舒適住宿的同時，輕鬆搭乘高鐵，省下寶貴的時間和金錢。
+                    <br><br>立即預訂您的房間，將高鐵車票一同加購，享受無縫的旅行體驗與實惠的價格。讓我們的專業服務為您的出行提供全方位的便捷與舒適，讓每一次旅行都成為愉快的回憶！</p>
+            </div>
+        </div>
+    </div>
+
+    <!--第四個活動 -->
+    <div class="event-list">
+        <div class="event-item" onclick="toggleEventDetails('event4')">
+            <span class="event-date">2024-08-01</span>
+            <span class="event-title">航站輕旅住房專案­</span>
+        </div>
+        
+    </div>
+    
+    <div id="event-details">
+        <div id="event4" class="event-detail-content" style="display:none;">
+            <img src="img/eventimg5.jpg" alt="活動圖片">
+            <div class="event-text">
+                <h2>航站輕旅住房專案</h2>
+                <p>慶記商旅攜手全台主要航空站，隆重推出獨家飯店聯票優惠專案——「航站輕旅」。此次住房專案特別為旅客打造了前所未有的便捷與尊貴享受，不僅讓您的旅行更輕鬆，更帶來一系列豐富的專屬禮遇。
+                    <br><br>
+                    凡入住慶記商旅，立即尊享價值 $888 的餐飲折抵金，可於酒店內餐廳及酒吧隨心選用。此外，選擇入住景觀房型的貴賓，更可額外享受全台唯一的航空豪景 Happy Hour 服務。每天傍晚時分，您可在醉人的夕陽下，俯瞰台中機場的壯麗景觀，享用酒店精心準備的酒水及輕食小點，體驗一場無與倫比的感官盛宴。
+                    <br><br>
+                    無論您是商務出差，還是悠閒度假，慶記商旅「航站輕旅」專案都將為您提供最貼心的服務和最難忘的住宿體驗。趕快預訂，讓您的旅程從慶記商旅開始，享受前所未有的舒適與便利！</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Contact Us</h2>
+                <p>Email: info@qingjiinn.com.tw</p>
+                <p>Phone: +886-8763-8763</p>
+            </div>
+            <div>
+                <h2>Follow Us</h2>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>   
+                <br>    
+                <br>
+                <br>
+                <br>    
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleEventDetails(eventId) {
+            var eventDetail = document.getElementById(eventId);
+
+            if (eventDetail.style.display === 'flex') {
+                eventDetail.style.display = 'none';  // 隱藏內容
+            } else {
+                eventDetail.style.display = 'flex';  // 顯示內容
+            }
+        }
+    </script>
+</body>
+</html>

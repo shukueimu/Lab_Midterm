@@ -1,0 +1,48 @@
+.swiper-container {
+    width: 100%;
+    height: 500px;
+    margin-top: 0; /* 移除 margin-top 確保緊貼 header 和 nav */
+    position: relative;
+}
+
+.swiper-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.swiper-slid {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 確保圖片填滿容器 */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: white !important;
+}
+
+.swiper-pagination {
+    position: absolute; /* 絕對定位 */
+    bottom: 10px; /* 距離圖片框底部的距離 */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 確保水平居中 */
+    display: flex;
+    justify-content: center; /* 確保分頁點水平居中 */
+    z-index: 10; /* 確保分頁點在其他內容之上 */
+}
+
+.swiper-pagination-bullet {
+    background: white !important; /* 分頁點顏色 */
+    width: 10px; /* 分頁點的寬度 */
+    height: 10px; /* 分頁點的高度 */
+    margin: 0 4px; /* 分頁點之間的間距 */
+    border-radius: 50%; /* 分頁點為圓形 */
+}
+

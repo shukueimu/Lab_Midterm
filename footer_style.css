@@ -1,0 +1,56 @@
+footer {
+    background-color: #000; /* 黑色背景 */
+    color: #fff; /* 白色文字 */
+    padding: 0px; /* 內邊距 */
+    text-align: center; /* 文字置中 */
+    margin-top: 20px; /* 與上方內容保持距離 */
+    vertical-align: top;
+    align-items: top;
+}
+
+footer .footer-content {
+    max-width: 1200px;
+    
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* 讓內容在水平方向兩端對齊 */
+    align-items: center; /* 垂直居中對齊 */
+}
+
+footer .footer-content div {
+    flex: 1;
+}
+
+
+
+
+footer .footer-content a {
+    display:inline-block;
+    color: #fff; /* 白色文字 */
+    text-decoration: none; /* 去掉下劃線 */
+    margin: 0 10px;
+}
+
+footer .footer-content a:hover {
+    color: #ccc; /* 懸停時的顏色變化 */
+}
+
+@media (max-width: 768px) {
+    footer .footer-content {
+        flex-direction: column;
+        align-items: center; /* 在小螢幕上垂直方向上對齊 */
+        text-align: center; /* 小螢幕時文字置中 */
+    }
+
+@media (max-width: 768px) {
+    footer .footer-content a {
+        margin: 5px 0; /* 調整間距以適應較小的螢幕 */
+        }
+}
+    
+
+    footer .footer-content div {
+        margin-bottom: 15px; /* 每個區塊之間增加距離 */
+        max-width: 100%; 
+    }
+}

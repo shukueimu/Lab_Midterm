@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交通資訊</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            overflow-x: hidden; /* 隱藏水平滾動條 */
+        }
+
+        header {
+            position: absolute; /* 使用絕對定位，使 header 可以在圖片上方 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 透明背景，調整 alpha 值以達到想要的透明度 */
+            color: white;
+            display: flex; /* 使用 flex 來對齊 logo 和文本 */
+            align-items: center; /* 使 Flexbox 容器內的子元素在垂直方向上居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            padding: 5px;
+            gap: 20px; /* 調整 logo 和文本之間的間距 */
+            z-index: 10; /* 確保 header 在圖片上方 */
+        }
+
+        header img {
+            max-height: 80px; /* 設置 logo 的最大高度 */
+            width: auto; /* 根據最大高度自動調整寬度 */
+        }
+
+        header .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保文本在 header 中左對齊 */
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+        }
+
+        header h2 {
+            margin: 2px 0 0;
+            font-size: 24px;
+        }
+
+        header a {
+            text-decoration: none;
+            color:inherit;
+        }
+        
+        nav {
+            position:absolute; /* 固定在頁面上 */
+            top: 103px; /* 使 nav 位於 header 下方 */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 10; /* 確保 nav 在其他內容上方 */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        .topimg5 {
+            position: relative;
+            width: 100%; /* 父容器寬度設為100% */
+            margin: 0; /* 移除外邊距 */
+            padding: 0; /* 移除內邊距 */
+            overflow: hidden; /* 防止圖片溢出 */
+        }
+
+
+        .topimg5 img {
+            width: 100%; /* 圖片寬度設為100% */
+            height: auto; /* 高度自動調整 */
+            display: block; /* 移除圖片下方的間距 */
+            border: none; /* 移除邊框 */
+            margin: 0px; /* 移除外邊距 */
+            padding: 0px; /* 移除內邊距 */
+            object-fit: cover; /* 確保圖片填滿容器且不變形 */
+        }
+
+        .topic{
+            text-align: center;
+            font-size: 40px;
+            color: #555454;
+            font-family: cursive; 
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+
+        /* 機場接送資訊 */
+
+        .airport {
+            width: 100%; /* 父容器寬度設為100% */
+            border-bottom: 1px solid rgb(200, 198, 198);
+            overflow: hidden; /* 確保圖片不超出容器 */
+         }
+        .airport img{
+            width: 100%; /* 圖片寬度設為100% */
+            height: auto; /* 高度自動調整 */
+            display: block; /* 移除圖片下方的間距 */
+            border: none; /* 移除邊框 */
+            padding: 0px; /* 移除內邊距 */
+            object-fit: cover; /* 確保圖片填滿容器且不變形 */
+            border-radius: 10px;
+            max-width: calc(100% - 40px); /* 留出左右邊距 */
+            margin-left: 20px;
+        }
+
+        .event-text {
+            background-color: #f4f4f4; /* 背景顏色 */
+            padding: 20px; /* 內邊距 */
+            border-radius: 10px; /* 圓角效果 */
+            margin: 20px auto; /* 上下邊距，並使容器水平居中 */
+            max-width: 800px; /* 最大寬度設置，防止內容過寬 */
+        }
+
+
+        .event-text ul {
+            padding-left: 20px; /* 調整列表項目左側內邊距 */
+        }
+
+        .event-text li {
+            margin-bottom: 10px; /* 每個列表項目之間的間距 */
+            line-height: 1.6; /* 增加行高使文本更易讀 */
+        }
+
+        .event-text li ul {
+            padding-left: 20px; /* 調整嵌套列表的左側內邊距 */
+            margin-top: 5px; /* 嵌套列表的上邊距 */
+        }
+
+        .event-text li ul li {
+            margin-bottom: 5px; /* 嵌套列表項目之間的間距 */
+        }
+
+        /* 地圖資訊 */
+        .map{
+            margin-left:20px;
+            margin-right:20px;
+        }
+        .map iframe{
+            width: 100%; /* 使地圖填滿容器的寬度 */
+            height: 400px; /* 設定固定高度 */
+            border: none; /* 移除邊框 */
+            border-radius: 10px;
+        }
+
+        .info-head{
+            font-size: 30px;
+            color: #415364;
+            margin: 0px;
+            text-align: center;
+            
+        }
+        .info-head2{
+            font-size: 23px;
+        }
+        
+        #traffic-info{
+            padding-left: 20px;
+        }
+
+
+    </style>
+
+    <link rel="stylesheet" href="footer_style.css">
+
+</head>
+<body>
+
+    <header>
+        <a href="midterm_project.html">
+        <img src="img/logo4.png" alt="Logo">
+        </a>
+        <div class="text">
+            <a href="midterm_project.html">
+            <h1>慶記商旅</h1>
+            <h2>Qingji Inn</h2>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="midterm_project.html">首頁</a>
+        <a href="hotel_intro.html">旅館簡介</a>
+        <a href="room_intro.html">房型介紹</a>
+        <a href="book_online.html">線上訂房</a>
+        <a href="event_news.html">活動消息</a>
+        <a href="traffic_info.html">交通資訊</a>
+        
+    </nav>
+
+    <div class="topimg5">
+        <img src="img/trafficinfo1.jpg" alt="活動圖片1">
+    </div>
+
+    
+    <h2 class="topic">交通資訊</h2>
+
+    <!-- 機場接送 -->
+    <div class="airport">
+        <img src="img/trafficinfo2.jpg" alt="交通資訊">
+        <div class="event-text">
+            <h2 class="info-head">慶記商旅機場接送服務</h2>
+            <br><br>
+            <ul>
+                <li><strong>需要機場接送服務者，請在線上訂房的備註欄填寫，或於訂房後向旅館櫃檯申請。</strong></li>
+                <li><strong>機場接送為單趟接駁服務，不含早餐。</strong></li>
+                <li><strong>接機(無台灣電話)須加舉牌費$200，以利司機現場聯繫</strong></li>
+                <li><strong>務必於入住前一晚告知飯店方接駁正確資訊，以利預約車輛。</strong></li>
+                <li><strong>請確實告知接駁人數以及行李件數大小：</li>
+                    <ul>
+                        <li><strong>小車(1-2位)行李箱(含紙箱)最多2件</strong></li>
+                        <li><strong>大車(3-4位)行李箱(含紙箱)最多4件</strong></li>
+                        <li  style="list-style-type: none;"><strong>※若人數、行李數與實際上車不符，司機有權拒載且不退費。</strong></li>
+                    </ul>
+                <li><strong>恕不接受當日更改接駁時間，若因個人行程安排等因素而須更改時間，則須請您自行處理前往機場或抵達飯店，相關衍生費用需請您自行支付。</strong></li>
+                <li><strong>另非本旅店之責而導致無法履行此行程，已收之款項旅店端將不退費。</strong></li>
+                <li><strong>嬰兒及孩童：0歲~6歲以下者，可同行入住不收費，視為不佔床、請留意為符合行車法規接駁費將另計。</strong></li>
+            </ul>
+
+        </div>
+    </div>
+
+    <br><br>
+
+    </div>
+    <!-- 地圖資訊 -->
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.603794174746!2d120.64853357378739!3d24.150548573299716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d9651ad5dbf%3A0x6762069c31f45f09!2z5ZyL5rOw5Lq65aO95YWs55uK5aSn5qiT!5e0!3m2!1szh-TW!2stw!4v1724308139322!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy">        
+        </iframe>
+    </div>
+
+    <div class="event-text">
+        <h2 class="info-head" id="traffic-info">慶記商旅交通資訊</h2>
+        <br>
+        <ul class="info-list">
+            <li class="info-head2" style="list-style-type: none;"><strong>大眾交通工具：</strong></li>
+                <ul style="list-style-type: disc;">
+                        <li><strong>台中市公車23、72、107皆可到達，下車站牌 -- 公益東興路口</strong></li>
+                        <li><strong>從台中火車站可搭乘27號公車往嶺東科技大學，下車站牌 -- 公益東興路口</strong></li>
+                        <li><strong>台中火車站可搭乘81號公車往統聯轉運站，下車站牌 -- 公益東興路口</strong></li>
+                        <li><strong>綠川東站可搭乘70號往嶺東科技大學，下車站牌 -- 公益東興路口</strong></li>
+                        <li><strong>後火車站可搭乘60號往坪頂，下車站牌 -- 大墩公益路口</strong></li>
+                        <li><strong>從秋紅谷可搭60號公車往大智公園，下車站牌 -- 大墩公益路口</strong></li>
+                        <li><strong>從統聯轉運站可搭乘81號公車往太平，下車站牌 -- 公益東興路口</strong></li>                    
+                </ul>
+            <br><br>
+            <li class="info-head2" style="list-style-type: none;"><strong>停車場資訊：</strong></li>
+                <ul style="list-style-type: disc;">
+                    <li><strong>本大樓附設地下停車場(B3)：平日30元/H，假日40元/H</strong></li>
+                    <li><strong>台灣聯通大墩11街入口：平日15元/0.5H，假日20元/0.5H</strong></li>
+                    <li><strong>台灣聯通大昌街入口(B3)：平日／假日：30元/H</strong></li>
+                    <li><strong>來來停車場：平日白天20元/H，假日30元/H</strong></li>
+                    <li><strong>公益路停車場：平日／假日：40元/H</strong></li>               
+                </ul>
+        </ul>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Contact Us</h2>
+                <p>Email: info@qingjiinn.com.tw</p>
+                <p>Phone: +886-8763-8763</p>
+            </div>
+            <div>
+                <h2>Follow Us</h2>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>   
+                <br>    
+                <br>
+                <br>
+                <br>    
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅館簡介</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            overflow-x: hidden; /* 隱藏水平滾動條 */
+        }
+
+        header {
+            position: absolute; /* 使用絕對定位，使 header 可以在圖片上方 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 透明背景，調整 alpha 值以達到想要的透明度 */
+            color: white;
+            display: flex; /* 使用 flex 來對齊 logo 和文本 */
+            align-items: center; /* 使 Flexbox 容器內的子元素在垂直方向上居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            padding: 5px;
+            gap: 20px; /* 調整 logo 和文本之間的間距 */
+            z-index: 10; /* 確保 header 在圖片上方 */
+        }
+
+        header img {
+            max-height: 80px; /* 設置 logo 的最大高度 */
+            width: auto; /* 根據最大高度自動調整寬度 */
+        }
+
+        header .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保文本在 header 中左對齊 */
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+        }
+
+        header h2 {
+            margin: 2px 0 0;
+            font-size: 24px;
+        }
+
+        header a {
+            text-decoration: none;
+            color:inherit;
+        }
+        
+        nav {
+            position:absolute; /* 固定在頁面上 */
+            top: 103px; /* 使 nav 位於 header 下方 */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 10; /* 確保 nav 在其他內容上方 */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        .topimg {
+            position: relative; /* 設置為相對定位，以便絕對定位的子元素能夠參考此元素 */
+            width: 100%; /* 父容器寬度設為100% */
+            margin: 0; /* 移除外邊距 */
+            padding: 0; /* 移除內邊距 */
+            overflow: hidden; /* 防止圖片溢出 */
+        }
+
+
+        .topimg img {
+            width: 100%; /* 圖片寬度設為100% */
+            height: auto; /* 高度自動調整 */
+            display: block; /* 移除圖片下方的間距 */
+            border: none; /* 移除邊框 */
+            margin: 0px; /* 移除外邊距 */
+            padding: 0px; /* 移除內邊距 */
+            object-fit: cover; /* 確保圖片填滿容器且不變形 */
+        }
+
+
+
+
+
+
+        .overlay {
+            position: absolute; /* 絕對定位，使其能夠放置在圖片的左下角 */
+            bottom: 0; /* 靠近底部 */
+            left: 0; /* 靠近左邊 */
+            background: rgba(0, 0, 0, 0.1); /* 黑色背景，透明度為0.6 */
+            color: white; /* 文字顏色為白色 */
+            padding: 10px; /* 內邊距 */
+            text-align: center; /* 文字置中 */
+            width: 100%; /* 區塊寬度設為100% */
+            box-sizing: border-box; /* 包括內邊距和邊框在內的寬度計算 */
+        }
+
+        .overlay h3 {
+            margin: 0; /* 移除外邊距 */
+            font-size: 48px; /* 設置字體大小 */
+            text-align: left;
+        }
+
+        .container {
+        font-family: 'Georgia', serif; /* 設置特定區塊的字型 */
+        background-color: #f7f7f7; /* 設置特定區塊的背景顏色 */
+        margin: 0px; /* 設置特定區塊的外邊距 */
+        padding: 20px; /* 設置特定區塊的內邊距 */
+        box-shadow: 0 0 10px rgba(0,0,0,0); /* 設置特定區塊的陰影效果 */
+        }
+
+        .introMap {
+            display: flex; /* 使用 flexbox 來排列子元素 */
+            justify-content: space-between; /* 使子元素在主軸上分佈 */
+            align-items: flex-start; /* 使子元素在交叉軸上對齊到頂部 */
+            margin: 20px; /* 添加外邊距，以便於觀察 */
+        }
+
+        .container {
+            flex: 1; /* 讓這個區塊占據主軸上的剩餘空間 */
+            margin-right: 20px; /* 為容器添加右邊距 */
+        }
+
+        .map {
+            flex: 1; /* 讓這個區塊占據主軸上的剩餘空間 */
+        }
+
+        .map iframe {
+            width: 100%; /* 使地圖填滿容器的寬度 */
+            height: 400px; /* 設定固定高度 */
+            border: none; /* 移除邊框 */
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center; /* 讓直條和文字垂直對齊 */
+            margin-top: 10px; /* 增加距離地圖的間距 */
+        }
+
+        .vertical-bar {
+            width: 5px;
+            height: 60px; /* 使直條高度與 .contact-info 的容器高度一致 */
+            background-color: rgb(69, 68, 68); /* 直條的顏色 */
+            margin-right: 10px; /* 直條和文字間的間距 */
+        }
+
+        .contact-text {
+            display: flex;
+            flex-direction: column; /* 讓文字垂直排列 */
+        }
+
+        .contact-text p {
+            margin: 0; /* 去除段落的預設外邊距 */
+        }
+
+
+    </style>
+
+    <link rel="stylesheet" href="footer_style.css">
+
+</head>
+<body>
+
+    <header>
+        <a href="midterm_project.html">
+        <img src="img/logo4.png" alt="Logo">
+        </a>
+        <div class="text">
+            <a href="midterm_project.html">
+            <h1>慶記商旅</h1>
+            <h2>Qingji Inn</h2>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="midterm_project.html">首頁</a>
+        <a href="hotel_intro.html">旅館簡介</a>
+        <a href="room_intro.html">房型介紹</a>
+        <a href="book_online.html">線上訂房</a>
+        <a href="event_news.html">活動消息</a>
+        <a href="traffic_info.html">交通資訊</a>
+        
+    </nav>
+
+    <div class="topimg">
+        <img src="img/img7.jpg" alt="旅館圖片5">
+        <div class="overlay">
+            <h3>旅館簡介</h3>
+        </div>
+    </div>
+    
+
+    <div class="introMap">
+        <div class="container">
+            <h2>關於我們</h2>
+            <p>台中慶記旅館自創立以來，已經歷經數十年的歷史，見證了台中市的變遷與發展。我們的旅館秉持著傳統的熱情服務和現代化的設施，致力於為每一位來訪的客人提供舒適而難忘的住宿體驗。從一開始的家庭經營小旅館，逐漸發展為如今的優質住宿選擇，慶記旅館始終不變的理念是提供賓至如歸的服務。
+                隨著時間的推移，台中慶記旅館一直不斷升級和完善我們的設施，以滿足現代旅客的需求。我們專注於每一個細節，無論是溫馨舒適的客房，還是專業友好的服務，我們都力求做到最好。我們相信，細緻入微的服務和高品質的住宿環境能夠讓每一位客人感受到家的溫暖和關懷。
+                <br><br>
+                旅館內部設施完善，包括現代化的會議室、健身房和休閒區，讓您在忙碌的日程中也能享受到放鬆的時光。我們的餐廳提供精緻的餐飲選擇，無論是豐盛的早餐還是精緻的晚餐，都能滿足您的味蕾。每一位員工都經過專業培訓，以確保能夠為您提供貼心周到的服務。
+                <br><br>
+                慶記旅館不僅僅是一個住宿的地方，更是您探索台中市的最佳起點。我們樂於為您提供當地旅遊資訊和建議，幫助您輕鬆安排每一天的行程。我們期待著您的光臨，並希望能夠成為您在台中最喜愛的住宿選擇。
+
+            </p>
+        </div>
+
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.603794174746!2d120.64853357378739!3d24.150548573299716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d9651ad5dbf%3A0x6762069c31f45f09!2z5ZyL5rOw5Lq65aO95YWs55uK5aSn5qiT!5e0!3m2!1szh-TW!2stw!4v1724308139322!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy"></iframe>
+            <div class="contact-info">
+                <div class="vertical-bar"></div>
+                <div class="contact-text">
+                    <p>地址：408台中市南屯區公益路二段51號</p>
+                    <p>電話：04-87638763</p>
+                    <p>傳真：04-87564231</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Contact Us</h2>
+                <p>Email: info@qingjiinn.com.tw</p>
+                <p>Phone: +886-8763-8763</p>
+            </div>
+            <div>
+                <h2>Follow Us</h2>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>   
+                <br>    
+                <br>
+                <br>
+                <br>    
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

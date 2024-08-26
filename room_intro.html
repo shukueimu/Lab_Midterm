@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房型介紹</title>
+    
+</head>
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color:whitesmoke;
+            overflow-x: hidden; /* 隱藏水平滾動條 */
+        }
+
+        header {
+            position: absolute; /* 使用絕對定位，使 header 可以在圖片上方 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 透明背景，調整 alpha 值以達到想要的透明度 */
+            color: white;
+            display: flex; /* 使用 flex 來對齊 logo 和文本 */
+            align-items: center; /* 使 Flexbox 容器內的子元素在垂直方向上居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            padding: 5px;
+            gap: 20px; /* 調整 logo 和文本之間的間距 */
+            z-index: 10; /* 確保 header 在圖片上方 */
+        }
+
+        header img {
+            max-height: 80px; /* 設置 logo 的最大高度 */
+            width: auto; /* 根據最大高度自動調整寬度 */
+        }
+
+        header .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保文本在 header 中左對齊 */
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+        }
+
+        header h2 {
+            margin: 2px 0 0;
+            font-size: 24px;
+        }
+
+        header a {
+            text-decoration: none;
+            color:inherit;
+        }
+        
+        nav {
+            position:absolute; /* 固定在頁面上 */
+            top: 103px; /* 使 nav 位於 header 下方 */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 10; /* 確保 nav 在其他內容上方 */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+
+        .topimg2 {
+            position: relative;
+            width: 100%; /* 父容器寬度設為100% */
+            height: auto;
+            margin: 0; /* 移除外邊距 */
+            padding: 0; /* 移除內邊距 */
+            overflow: hidden ; /* 防止圖片溢出 */
+        }
+        .topimg2 img {
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            border: none; 
+            margin: 0px; 
+            padding: 0px; 
+            object-fit: cover; 
+        }
+
+        .overlay2 {
+            position: absolute; /* 使其能夠放置在圖片的左下角 */
+            bottom:0px;
+            left: 0; /* 靠近左邊 */
+            background: rgba(0, 0, 0, 0.1); /* 黑色背景，透明度為0.6 */
+            color: white; /* 文字顏色為白色 */
+            padding: 10px; /* 內邊距 */
+            text-align: center; /* 文字置中 */
+            width: 100%; /* 區塊寬度設為100% */
+            box-sizing: border-box; /* 包括內邊距和邊框在內的寬度計算 */
+            
+        }
+
+        .overlay2 h3 {
+            margin: 0; 
+            font-size: 48px; 
+            bottom: 50px;
+            text-align: left;
+        }
+
+        .room-type {
+            text-align: center;
+            font-family:cursive;
+            font-size: 40px;
+            color: rgb(102, 102, 103);
+        }
+    </style>
+    <link rel="stylesheet" href="footer_style.css">
+    <link rel="stylesheet" href="room_style.css">
+</head>
+<body>
+
+    <header>
+        <a href="midterm_project.html">
+        <img src="img/logo4.png" alt="Logo">
+        </a>
+        <div class="text">
+            <a href="midterm_project.html">
+            <h1>慶記商旅</h1>
+            <h2>Qingji Inn</h2>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="midterm_project.html">首頁</a>
+        <a href="hotel_intro.html">旅館簡介</a>
+        <a href="room_intro.html">房型介紹</a>
+        <a href="book_online.html">線上訂房</a>
+        <a href="event_news.html">活動消息</a>
+        <a href="traffic_info.html">交通資訊</a>
+        
+    </nav>
+
+    <div class="topimg2">
+        <img src="img/img9.jpg" alt="旅館圖片9">
+        <div class="overlay2">
+            <h3>房型介紹</h3>
+        </div>
+    </div>
+
+    <br>
+    <h4 class="room-type">房型種類</h4>
+    <br>
+
+    <div class="room-container">
+        <!-- 第一種房型 -->
+        <div>
+            <img src="img/room1.jpg" alt="商務單床房">
+        </div>
+        <div class="room-description">
+            <h3>商務單床房</h3>
+            <p>
+            商務單床房擁有寬敞舒適的空間，配備高級床墊及現代化設施，適合商務旅客及休閒旅遊人士。
+            客房內設有書桌、免費Wi-Fi、以及符合人體工學的辦公椅，讓您能夠輕鬆處理工作事宜。同時，落地窗戶可飽覽城市美景，為您的住宿增添一份愜意。    
+            </p>
+            <ul class="room-features">
+                <li>面積：6坪</li>
+                <li>床型尺寸：雙人大床 153*195 cm</li>
+                <li>入住人數：1-2人</li>
+                <li>書桌</li>
+                <li>免費Wi-Fi</li>
+                <li>冰箱</li>
+                <li>盥洗備品</li>
+                <li>室內拖鞋</li>
+            </ul>
+            <div class="book-now">
+                <a href="book_online.html">立即訂房</a>
+            </div>
+        </div>
+
+        <!-- 第二種房型 -->
+        <div>
+            <img src="img/room3.jpg" alt="經典雙床房">
+        </div>
+        <div class="room-description">
+            <h3>經典雙床房</h3>
+            <p>
+                經典雙床房專為追求舒適與實用的旅客設計，提供兩張獨立雙床，讓您和同伴或家人能夠享受寬敞的空間與優質的睡眠。
+                房內配有現代化的設施，包括高級床墊、書桌、免費 Wi-Fi 及舒適的座椅，滿足各種需求。落地窗外的美景，讓您在放鬆之餘也能享受窗外的自然光線。
+                無論是商務旅行還是家庭度假，經典雙床房都是您理想的選擇。 
+            </p>
+            <ul class="room-features">
+                <li>面積：10坪</li>
+                <li>床型尺寸：兩張床 153*195 cm</li>
+                <li>入住人數：2-4人</li>
+                <li>大理石書桌</li>
+                <li>免費Wi-Fi</li>
+                <li>冰箱</li>
+                <li>盥洗備品</li>
+                <li>室內拖鞋</li>
+            </ul>
+            <div class="book-now">
+                <a href="book_online.html">立即訂房</a>
+            </div>
+        </div>
+
+        <!-- 第三種房型 -->
+        <div>
+            <img src="img/room4.jpg" alt="海景豪華客房">
+        </div>
+        <div class="room-description">
+            <h3>海景豪華客房</h3>
+            <p>
+                海景豪華客房是慶記商旅奢華的選擇，專為追求極致舒適與壯麗景色的旅客而設計。房間內配備了超大雙人床和高品質床墊，讓您享受極致的放鬆與安眠。
+                寬敞的落地窗提供無遮擋的海景視野，您可以在舒適的環境中欣賞迷人的海景，感受海風的輕拂。
+                客房還配有現代化設施，包括私人陽台、書桌、免費 Wi-Fi 和豪華浴室，讓您在悠閒中體驗頂級的奢華感受。無論是日出還是日落，海景豪華客房都將為您提供難忘的住宿體驗。 
+            </p>
+            <ul class="room-features">
+                <li>面積：12坪</li>
+                <li>床型尺寸：一張大床 182*212 cm</li>
+                <li>入住人數：2-4人</li>
+                <li>書桌</li>
+                <li>免費Wi-Fi</li>
+                <li>冰箱</li>
+                <li>盥洗備品</li>
+                <li>按摩浴缸</li>
+            </ul>
+            <div class="book-now">
+                <a href="book_online.html">立即訂房</a>
+            </div>
+        </div>
+
+        <!-- 第四種房型 -->
+        <div>
+            <img src="img/room5.jpg" alt="景觀家庭客房">
+        </div>
+        <div class="room-description">
+            <h3>景觀家庭客房</h3>
+            <p>
+                景觀家庭客房為家庭旅客精心設計，擁有兩張超大床和寬敞的空間，讓您和家人能夠舒適地放鬆和休息。
+                客房內部設計現代，融合了豪華與實用，提供了超大坪數的活動空間，讓每位家庭成員都能享有自己的舒適區域。
+                大面積的窗戶不僅讓自然光線充盈整個房間，還提供迷人的外部景觀。房內設有書桌、免費 Wi-Fi 及舒適座椅，滿足您所有的需求。無論是度假還是短期旅行，景觀家庭客房都是您與家人共度美好時光的理想選擇。 
+            </p>
+            <ul class="room-features">
+                <li>面積：16坪</li>
+                <li>床型尺寸：兩張大床 182*212 cm</li>
+                <li>入住人數：4-6人</li>
+                <li>餐桌</li>
+                <li>免費Wi-Fi</li>
+                <li>冰箱</li>
+                <li>盥洗備品</li>
+                <li>按摩浴缸</li>
+            </ul>
+            <div class="book-now">
+                <a href="book_online.html">立即訂房</a>
+            </div>
+        </div>
+
+        <!-- 第五種房型 -->
+        <div>
+            <img src="img/room6.jpg" alt="總統套房">
+        </div>
+        <div class="room-description">
+            <h3>總統套房</h3>
+            <p>
+                總統套房是我們的巔峰之選，為追求至高無上的奢華與尊榮的賓客精心打造。
+                此套房擁有廣闊的起居空間與私密臥室，配備頂級超大雙人床和精緻床品，讓您體驗最極致的睡眠舒適。
+                室內裝潢融合現代風格與古典優雅，每一處細節都顯示出卓越品位。私人陽台上，您可以俯瞰壯麗的城市天際線或無垠的海景，沉浸在日出或日落的絕美景色中。
+                套房還擁有專屬的會議區、奢華浴室、高級影音設備以及無限量高速 Wi-Fi，全面滿足您工作與休閒的需求。
+                無論是高端商務出差還是奢華度假，總統套房都將為您呈現無與倫比的極致體驗。
+            <ul class="room-features">
+                <li>面積：45坪</li>
+                <li>床型尺寸：兩張大床 182*212 cm</li>
+                <li>入住人數：4-6人</li>
+                <li>私人陽台</li>
+                <li>獨立臥室</li>
+                <li>會議桌</li>
+                <li>家庭劇院</li>
+                <li>送餐服務</li>
+            </ul>
+            <div class="book-now">
+                <a href="book_online.html">立即訂房</a>
+            </div>
+        </div>
+    
+    </div>
+    
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Contact Us</h2>
+                <p>Email: info@qingjiinn.com.tw</p>
+                <p>Phone: +886-8763-8763</p>
+            </div>
+            <div>
+                <h2>Follow Us</h2>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>   
+                <br>    
+                <br>
+                <br>
+                <br>    
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

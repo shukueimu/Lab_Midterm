@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>線上訂房</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            overflow-x: hidden; /* 隱藏水平滾動條 */
+        }
+
+        header {
+            position: absolute; /* 使用絕對定位，使 header 可以在圖片上方 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 透明背景，調整 alpha 值以達到想要的透明度 */
+            color: white;
+            display: flex; /* 使用 flex 來對齊 logo 和文本 */
+            align-items: center; /* 使 Flexbox 容器內的子元素在垂直方向上居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            padding: 5px;
+            gap: 20px; /* 調整 logo 和文本之間的間距 */
+            z-index: 10; /* 確保 header 在圖片上方 */
+        }
+
+        header img {
+            max-height: 80px; /* 設置 logo 的最大高度 */
+            width: auto; /* 根據最大高度自動調整寬度 */
+        }
+
+        header .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保文本在 header 中左對齊 */
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+        }
+
+        header h2 {
+            margin: 2px 0 0;
+            font-size: 24px;
+        }
+
+        header a {
+            text-decoration: none;
+            color:inherit;
+        }
+        
+        nav {
+            position:absolute; /* 固定在頁面上 */
+            top: 103px; /* 使 nav 位於 header 下方 */
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 10; /* 確保 nav 在其他內容上方 */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        .topimg3 {
+            position: relative;
+            width: 100%; /* 父容器寬度設為100% */
+            margin: 0; /* 移除外邊距 */
+            padding: 0; /* 移除內邊距 */
+            overflow: hidden; /* 防止圖片溢出 */
+        }
+
+
+        .topimg3 img {
+            width: 100%; /* 圖片寬度設為100% */
+            height: auto; /* 高度自動調整 */
+            display: block; /* 移除圖片下方的間距 */
+            border: none; /* 移除邊框 */
+            margin: 0px; /* 移除外邊距 */
+            padding: 0px; /* 移除內邊距 */
+            object-fit: cover; /* 確保圖片填滿容器且不變形 */
+        }
+
+        .topic{
+            text-align: center;
+            font-size: 40px;
+            color: #555454;
+            font-family: cursive; 
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px; 
+            box-sizing: border-box; /*讓線上訂房和選擇日期對齊*/
+        }
+
+        #booking-form, #room-selection, #guest-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin-bottom: 20px;
+        }
+
+        label{
+            display: block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #555;
+            ;
+        }
+
+        input[type="text"],input[type="date"],input[type="email"],select,textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #103b68;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .required-input::before {
+            content: " *";
+            color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="footer_style.css">
+</head>
+<body>
+
+    <header>
+        <a href="midterm_project.html">
+        <img src="img/logo4.png" alt="Logo">
+        </a>
+        <div class="text">
+            <a href="midterm_project.html">
+            <h1>慶記商旅</h1>
+            <h2>Qingji Inn</h2>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="midterm_project.html">首頁</a>
+        <a href="hotel_intro.html">旅館簡介</a>
+        <a href="room_intro.html">房型介紹</a>
+        <a href="book_online.html">線上訂房</a>
+        <a href="event_news.html">活動消息</a>
+        <a href="traffic_info.html">交通資訊</a>
+        
+    </nav>
+
+    <div class="topimg3">
+        <img src="img/lobby2.jpg" alt="旅館圖片5">
+    </div>
+    
+    <h2 class="topic">線上訂房</h2>
+
+    <div class="container">
+        <form id="booking-form">
+            <label for="check-in">選擇入住日期：</label>
+            <input type="date" id="check-in" name="check-in" required>
+
+            <label for="check-out">選擇退房日期：</label>
+            <input type="date" id="check-out" name="check-out" required>
+
+            <button type="button" onclick="searchRooms()">查詢</button>
+
+        </form>
+
+        <div id="room-selection" style="display:none;">
+            <label for="room-type">選擇房型：</label>
+            <select id="room-type" name="room-type" required>
+                <option value="business">商務單床房</option>
+                <option value="classic">經典雙床房</option>
+                <option value="deluxe">海景豪華客房</option>
+                <option value="family">景觀家庭客房</option>
+                <option value="presidential">總統套房</option>
+            </select>
+    </div>
+
+    <div id="guest-info" style="display:none;">
+        <label for="name" class="required-input">姓名：</label>
+        <input type="text" id="name" name="name" required>
+        <span id="name-error" class="error-message">請輸入姓名</span>
+
+        <br>
+
+        <label for="phone" class="required-input">電話：</label>
+        <input type="text" id="phone" name="phone" required>
+        <span id="phone-error" class="error-message">請輸入正確的電話號碼</span>
+    
+        <br>
+
+        <label for="email" class="required-input">email：</label>
+        <input type="email" id="email" name="email" required>
+        <span id="email-error" class="error-message">請輸入正確的email</span>
+        
+        <br>
+
+        <label for="requests">備註需求：</label>
+        <textarea id="requests" name="requests"></textarea>
+    
+        <button type="button" onclick="submitBooking()">確認訂房</button>
+    </div>
+</div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Contact Us</h2>
+                <p>Email: info@qingjiinn.com.tw</p>
+                <p>Phone: +886-8763-8763</p>
+            </div>
+            <div>
+                <h2>Follow Us</h2>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Line</a>   
+                <br>    
+                <br>
+                <br>
+                <br>    
+            </div>
+        </div>
+    </footer>
+
+    <script>
+            
+        // 設訂房日期的最小值為明天
+        let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('check-in').min = tomorrow.toISOString().split("T")[0];
+
+        //用EventListener，當使用者選擇了一個新的訂房日期，自動調整退房日期的最小可選日期
+        document.getElementById('check-in').addEventListener('change', function() {
+            let checkInDate = new Date(this.value);
+            checkInDate.setDate(checkInDate.getDate() + 1); // 設退房日期最小值為訂房日期的下一天
+            document.getElementById('check-out').min = checkInDate.toISOString().split("T")[0];
+        });
+
+        //查詢按鈕
+        function searchRooms() {
+            let checkInDate = document.getElementById('check-in').value;
+            let checkOutDate = document.getElementById('check-out').value;
+
+            // 檢查是否有選擇入住日期和退房日期
+            if (checkInDate === '' || checkOutDate === '') {
+                alert('請選擇入住日期和退房日期');
+                return;
+            }
+
+            // 如果已選擇日期，顯示房型選擇和客人資訊欄位
+            document.getElementById('room-selection').style.display = 'block';
+            document.getElementById('guest-info').style.display = 'block';
+        }
+
+        //
+        function submitBooking() {
+            // 清除先前的錯誤訊息(如果有的話)
+            document.getElementById('name-error').style.display = 'none';
+            document.getElementById('phone-error').style.display = 'none';
+            document.getElementById('email-error').style.display = 'none';
+
+            let isValid = true;
+
+            // 驗證姓名
+            let name = document.getElementById('name').value.trim();
+            if (name === '') {
+                document.getElementById('name-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // 驗證電話（僅限數字）
+            let phone = document.getElementById('phone').value.trim();
+            if (!/^\d+$/.test(phone)) {
+                document.getElementById('phone-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // 驗證 email（是否包含@）
+            let email = document.getElementById('email').value.trim();
+            if (!/@/.test(email)) {
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid===true) {
+                alert('訂房成功！');
+                document.getElementById('booking-form').reset();
+                document.getElementById('room-selection').style.display = 'none';
+                document.getElementById('guest-info').style.display = 'none';
+                window.location.href = 'midterm_project.html'; // 回到首頁
+            }
+        }
+
+    </script>
+</body>
+</html>
